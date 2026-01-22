@@ -10,7 +10,6 @@
             --primary-black: #121212;
             --accent-green: #2ecc71;
             --bg-light: #f8f9fa;
-            --card-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
         body { 
@@ -21,22 +20,16 @@
             overflow-x: hidden;
         }
 
-        /* Header & Brand */
+        /* Header */
         .header { 
-            background: white; 
-            padding: 25px 20px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            background: white; padding: 25px 20px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05);
         }
-        .logo { font-size: 28px; font-weight: 900; letter-spacing: -1px; text-transform: uppercase; margin-left: 40px; flex-grow: 1; text-align: center; }
+        .logo { font-size: 28px; font-weight: 900; letter-spacing: -1px; text-transform: uppercase; flex-grow: 1; text-align: center; margin-left: 40px; }
         .menu-btn { font-size: 24px; cursor: pointer; }
 
-        /* Modern Sidebar */
+        /* Sidebar */
         .sidebar { 
             position: fixed; top: 0; right: -300px; width: 300px; height: 100%; 
             background: white; box-shadow: -10px 0 30px rgba(0,0,0,0.1); 
@@ -45,85 +38,56 @@
         }
         .sidebar.active { right: 0; }
         .sidebar-brand { font-size: 24px; font-weight: 900; margin-bottom: 40px; }
-        .sidebar a { 
-            display: flex; align-items: center; gap: 15px; padding: 20px 0; 
-            color: var(--primary-black); text-decoration: none; font-size: 18px; 
-            font-weight: 500; border-bottom: 1px solid #f0f0f0; 
-        }
+        .sidebar a { display: flex; align-items: center; gap: 15px; padding: 20px 0; color: var(--primary-black); text-decoration: none; font-size: 18px; border-bottom: 1px solid #f0f0f0; }
 
-        /* Navigation Tabs */
-        .nav-tabs { 
-            display: flex; justify-content: center; background: white; 
-            gap: 50px; border-bottom: 1px solid #eee;
-        }
-        .tab { 
-            font-size: 15px; font-weight: 800; color: #bbb; cursor: pointer; 
-            padding: 15px 5px; position: relative; transition: 0.3s;
-        }
+        /* Tabs */
+        .nav-tabs { display: flex; justify-content: center; background: white; gap: 50px; border-bottom: 1px solid #eee; }
+        .tab { font-size: 15px; font-weight: 800; color: #bbb; cursor: pointer; padding: 15px 5px; position: relative; transition: 0.3s; }
         .tab.active { color: var(--primary-black); }
-        .tab.active::after { 
-            content: ''; position: absolute; bottom: 0; left: 0; 
-            width: 100%; height: 3px; background: var(--primary-black); 
-        }
+        .tab.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--primary-black); }
 
-        /* Sections & Search */
+        /* Search & Sections */
         .section { display: none; padding: 30px 20px; animation: fadeIn 0.4s ease; }
         .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .search-wrapper { text-align: center; margin-bottom: 40px; }
-        .search-input { 
-            width: 100%; max-width: 450px; padding: 18px 25px; border-radius: 15px; 
-            border: 1px solid #eee; background: white; box-shadow: var(--card-shadow); 
-            font-size: 16px; outline: none;
-        }
+        .search-input { width: 100%; max-width: 450px; padding: 18px 25px; border-radius: 15px; border: 1px solid #eee; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); font-size: 16px; outline: none; }
 
-        /* Modern Cards for Stores and Discounts */
+        /* Enhanced Cards (Name, Desc, Price, Logo) */
         .card { 
-            background: white; padding: 25px; border-radius: 20px; 
-            margin: 0 auto 15px; display: flex; justify-content: space-between; 
-            align-items: center; max-width: 500px; transition: 0.3s;
-            border: 1px solid rgba(0,0,0,0.02);
+            background: white; padding: 20px; border-radius: 20px; 
+            margin: 0 auto 15px; display: flex; align-items: center; 
+            gap: 15px; max-width: 500px; transition: 0.3s; border: 1px solid rgba(0,0,0,0.02);
         }
         .card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
+        .store-logo-box { width: 60px; height: 60px; background: #f0f0f0; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 10px; color: #555; text-align: center; overflow: hidden; }
         
-        .info { display: flex; flex-direction: column; gap: 4px; text-align: left; }
+        .info { flex-grow: 1; text-align: left; display: flex; flex-direction: column; gap: 3px; }
         .title { font-weight: 800; font-size: 17px; }
-        .sub-title { color: var(--accent-green); font-size: 15px; font-weight: 700; }
+        .desc { font-size: 12px; color: #888; }
+        .price { color: var(--accent-green); font-weight: 700; font-size: 14px; }
 
         .btn { 
             background: var(--primary-black); color: white; border: none; 
-            padding: 12px 22px; border-radius: 12px; font-weight: 700; 
-            cursor: pointer; text-decoration: none; font-size: 13px;
+            padding: 12px 20px; border-radius: 12px; font-weight: 700; 
+            cursor: pointer; text-decoration: none; font-size: 12px;
         }
         .btn-copy { background: #f0f0f0; color: var(--primary-black); border: 1px solid #ddd; }
-
-        /* Social Links */
-        .insta-link { color: #E1306C !important; font-weight: bold !important; border: none !important; }
     </style>
 </head>
 <body>
 
     <div id="sidebar" class="sidebar">
         <div class="sidebar-brand">LOXIT</div>
-        <a href="#" onclick="alert('LOXIT is your best choice to guide you to the best prices.')">
-            <i class="fa-solid fa-circle-info"></i> About Us
-        </a>
-        <a href="mailto:info@loxit.com">
-            <i class="fa-solid fa-comment-dots"></i> Feedback
-        </a>
-        <div style="margin-top: 40px;">
-            <a href="https://instagram.com/loxitofficial" target="_blank" class="insta-link">
-                <i class="fab fa-instagram"></i> loxitofficial
-            </a>
-        </div>
+        <a href="#" onclick="alert('LOXIT is your best choice to guide you to the best prices.')"><i class="fa-solid fa-circle-info"></i> About Us</a>
+        <a href="mailto:info@loxit.com"><i class="fa-solid fa-comment-dots"></i> Feedback</a>
+        <a href="https://instagram.com/loxitofficial" target="_blank" style="color:#E1306C; border:none"><i class="fab fa-instagram"></i> loxitofficial</a>
     </div>
 
     <div class="header">
         <div class="logo">LOXIT</div>
-        <div class="menu-btn" onclick="toggleMenu()">
-            <i class="fa-solid fa-bars-staggered"></i>
-        </div>
+        <div class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars-staggered"></i></div>
     </div>
 
     <div class="nav-tabs">
@@ -135,45 +99,41 @@
         <div class="search-wrapper">
             <input type="text" id="searchInput" class="search-input" placeholder="Search for products..." oninput="handleSearch()">
         </div>
-        <div id="store-results">
-            </div>
+        <div id="store-results"></div>
     </div>
 
     <div id="discount" class="section">
         <div class="card">
             <div class="info">
-                <span class="title">AliExpress Promo</span>
-                <span class="sub-title">15% OFF SITEWIDE</span>
-            </div>
-            <button class="btn btn-copy" onclick="copyCode('ALISALE')">COPY</button>
-        </div>
-        <div class="card">
-            <div class="info">
-                <span class="title">iHerb Global</span>
-                <span class="sub-title">20% DISCOUNT</span>
+                <span class="title">iHerb Code</span>
+                <span class="desc">Health & Wellness Promo</span>
+                <span class="price">20% OFF</span>
             </div>
             <button class="btn btn-copy" onclick="copyCode('NEW20')">COPY</button>
         </div>
+        <div class="card">
+            <div class="info">
+                <span class="title">AliExpress Promo</span>
+                <span class="desc">Site-wide savings</span>
+                <span class="price">15% OFF</span>
+            </div>
+            <button class="btn btn-copy" onclick="copyCode('ALISALE')">COPY</button>
         </div>
+    </div>
 
     <script>
-        function toggleMenu() {
-            document.getElementById('sidebar').classList.toggle('active');
-        }
-
+        function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); }
         function switchTab(tabId, el) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             el.classList.add('active');
-            if(tabId === 'stores') toggleMenu(); // Close menu if open
         }
 
-        // Your Admitad Affiliate Data
         const storeData = [
-            { name: "AliExpress", base: "https://rzekl.com/g/1e8d114494e1ef4709f016525dc3e8/?ulp=", searchUrl: "https://www.aliexpress.com/wholesale?SearchText=" },
-            { name: "Alibaba", base: "https://rzekl.com/g/pm1aev55cle1ef4709f0219aa26f6f/?ulp=", searchUrl: "https://www.alibaba.com/showroom/" },
-            { name: "iHerb", base: "https://xnmik.com/g/ncvzabqdgme1ef4709f062343b7806/?ulp=", searchUrl: "https://www.iherb.com/search?kw=" }
+            { name: "AliExpress", base: "https://rzekl.com/g/1e8d114494e1ef4709f016525dc3e8/?ulp=", searchUrl: "https://www.aliexpress.com/wholesale?SearchText=", desc: "Global marketplace deals" },
+            { name: "Alibaba", base: "https://rzekl.com/g/pm1aev55cle1ef4709f0219aa26f6f/?ulp=", searchUrl: "https://www.alibaba.com/showroom/", desc: "Best for bulk & wholesale" },
+            { name: "iHerb", base: "https://xnmik.com/g/ncvzabqdgme1ef4709f062343b7806/?ulp=", searchUrl: "https://www.iherb.com/search?kw=", desc: "Vitamins & Supplements" }
         ];
 
         function handleSearch() {
@@ -183,14 +143,22 @@
             
             if(query.length > 1) {
                 storeData.forEach(item => {
-                    const finalLink = item.base + encodeURIComponent(item.searchUrl + query);
+                    let fullSearchUrl = item.searchUrl + encodeURIComponent(query);
+                    // Fixed Problem 2 & Language: Force English and JO for iHerb
+                    if(item.name === "iHerb") { fullSearchUrl += "&l=en&cc=JO"; }
+                    
+                    const finalLink = item.base + encodeURIComponent(fullSearchUrl);
+                    
+                    // Fixed Problem 1: Full info layout (Logo, Title, Desc, Price)
                     container.innerHTML += `
                         <div class="card">
+                            <div class="store-logo-box">${item.name}</div>
                             <div class="info">
                                 <span class="title">${item.name}</span>
-                                <span style="font-size: 12px; color: #999;">Verified Affiliate Result</span>
+                                <span class="desc">${item.desc}</span>
+                                <span class="price">Results for "${query}"</span>
                             </div>
-                            <a href="${finalLink}" target="_blank" class="btn">VIEW DEAL</a>
+                            <a href="${finalLink}" target="_blank" class="btn">VIEW</a>
                         </div>`;
                 });
             }
@@ -200,16 +168,6 @@
             navigator.clipboard.writeText(code);
             alert("Promo Code Copied: " + code);
         }
-
-        // Close sidebar when clicking outside
-        document.addEventListener('click', (e) => {
-            const sidebar = document.getElementById('sidebar');
-            const menuBtn = document.querySelector('.menu-btn');
-            if (!sidebar.contains(e.target) && !menuBtn.contains(e.target) && sidebar.classList.contains('active')) {
-                sidebar.classList.remove('active');
-            }
-        });
     </script>
 </body>
 </html>
-
