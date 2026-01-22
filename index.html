@@ -3,94 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOXIT - Verified Deals</title>
+    <title>LOXIT - Premium Shopping</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --primary: #121212; --green: #2ecc71; --bg: #f8f9fa; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--primary); }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--primary); overflow-x: hidden; }
         .header { background: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
         .logo { font-size: 26px; font-weight: 900; letter-spacing: -1px; flex-grow: 1; text-align: center; }
         .nav-tabs { display: flex; justify-content: center; background: white; gap: 40px; border-bottom: 1px solid #eee; }
-        .tab { font-size: 14px; font-weight: 800; color: #bbb; cursor: pointer; padding: 15px 5px; position: relative; }
+        .tab { font-size: 14px; font-weight: 800; color: #bbb; cursor: pointer; padding: 15px 5px; position: relative; transition: 0.3s; }
         .tab.active { color: var(--primary); }
         .tab.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--primary); }
         .search-area { padding: 30px 20px; text-align: center; }
-        .search-box { width: 100%; max-width: 400px; padding: 15px 20px; border-radius: 12px; border: 1px solid #ddd; outline: none; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .card { background: white; padding: 18px; border-radius: 16px; margin: 0 auto 12px; display: flex; align-items: center; gap: 15px; max-width: 450px; border: 1px solid rgba(0,0,0,0.03); }
-        .store-icon { width: 55px; height: 55px; background: #eee; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 9px; color: #666; }
+        .search-box { width: 100%; max-width: 400px; padding: 15px 20px; border-radius: 12px; border: 1px solid #ddd; outline: none; box-shadow: 0 4px 12px rgba(0,0,0,0.05); font-size: 16px; }
+        
+        /* Product Cards according to your sketch */
+        .card { background: white; padding: 18px; border-radius: 16px; margin: 0 auto 12px; display: flex; align-items: center; gap: 15px; max-width: 450px; border: 1px solid rgba(0,0,0,0.03); transition: 0.3s; }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
+        .store-icon { width: 60px; height: 60px; background: #121212; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 10px; color: #fff; text-align: center; line-height: 1.2; }
         .info { flex-grow: 1; text-align: left; }
-        .title { font-weight: 800; font-size: 16px; display: block; }
-        .desc { font-size: 12px; color: #888; display: block; margin-top: 2px; }
+        .title { font-weight: 800; font-size: 16px; display: block; color: #000; }
+        .desc { font-size: 12px; color: #777; display: block; margin-top: 2px; }
         .price-tag { color: var(--green); font-weight: 700; font-size: 13px; margin-top: 4px; display: block; }
-        .go-btn { background: var(--primary); color: white; padding: 10px 18px; border-radius: 10px; text-decoration: none; font-size: 12px; font-weight: 700; }
+        .go-btn { background: var(--primary); color: white; padding: 10px 18px; border-radius: 10px; text-decoration: none; font-size: 12px; font-weight: 700; transition: 0.2s; }
+        .go-btn:active { transform: scale(0.95); }
+
+        /* Sidebar */
+        .sidebar { position: fixed; top: 0; right: -300px; width: 300px; height: 100%; background: white; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: 0.4s; z-index: 1000; padding: 50px 20px; box-sizing: border-box; }
+        .sidebar.active { right: 0; }
+        .sidebar a { display: block; padding: 15px 0; color: #333; text-decoration: none; font-weight: 600; border-bottom: 1px solid #f5f5f5; }
     </style>
 </head>
 <body>
 
+    <div id="sidebar" class="sidebar">
+        <h2 style="font-weight:900; margin-bottom: 30px;">LOXIT</h2>
+        <a href="#" onclick="alert('LOXIT is your best choice to guide you to the best prices.')">About Us</a>
+        <a href="mailto:info@loxit.com">Feedback</a>
+        <a href="https://instagram.com/loxitofficial" target="_blank" style="color: #E1306C;"><i class="fab fa-instagram"></i> loxitofficial</a>
+    </div>
+
     <div class="header">
         <div class="logo">LOXIT</div>
-        <div style="font-size: 22px; cursor: pointer;">☰</div>
+        <div onclick="toggleSidebar()" style="font-size: 24px; cursor: pointer;">☰</div>
     </div>
 
     <div class="nav-tabs">
-        <div class="tab active">STORES</div>
-        <div class="tab">DISCOUNTS</div>
+        <div class="tab active" onclick="switchSection('stores', this)">STORES</div>
+        <div class="tab" onclick="switchSection('discounts', this)">DISCOUNTS</div>
     </div>
 
-    <div class="search-area">
-        <input type="text" id="mainSearch" class="search-box" placeholder="Type product name..." oninput="executeSearch()">
+    <div id="stores-sec" class="section-content" style="display: block;">
+        <div class="search-area">
+            <input type="text" id="mainSearch" class="search-box" placeholder="Search product name..." oninput="performSearch()">
+        </div>
+        <div id="results-container" style="padding: 0 20px 40px;"></div>
     </div>
 
-    <div id="results" style="padding: 0 20px 40px;"></div>
+    <div id="discounts-sec" class="section-content" style="display: none; padding: 40px 20px;">
+        <div class="card">
+            <div class="info">
+                <span class="title">iHerb Coupon</span>
+                <span class="desc">Global Wellness Discount</span>
+                <span class="price-tag">20% OFF</span>
+            </div>
+            <button class="go-btn" onclick="copy('NEW20')">COPY</button>
+        </div>
+    </div>
 
     <script>
-        const stores = [
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+        
+        function switchSection(sec, el) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            if(sec === 'stores') {
+                document.getElementById('stores-sec').style.display = 'block';
+                document.getElementById('discounts-sec').style.display = 'none';
+            } else {
+                document.getElementById('stores-sec').style.display = 'none';
+                document.getElementById('discounts-sec').style.display = 'block';
+            }
+        }
+
+        const storeList = [
             { 
                 n: "AliExpress", 
                 b: "https://rzekl.com/g/1e8d114494e1ef4709f016525dc3e8/?ulp=", 
                 s: "https://www.aliexpress.com/wholesale?SearchText=", 
-                d: "Global Direct Shipping",
-                p: "Best Online Price"
+                d: "Worldwide Shopping",
+                p: "Best Deals Found"
             },
             { 
                 n: "Alibaba", 
                 b: "https://rzekl.com/g/pm1aev55cle1ef4709f0219aa26f6f/?ulp=", 
                 s: "https://www.alibaba.com/trade/search?SearchText=", 
-                d: "Wholesale & Bulk Orders",
+                d: "Wholesale Global",
                 p: "Factory Direct"
             },
             { 
                 n: "iHerb", 
                 b: "https://xnmik.com/g/ncvzabqdgme1ef4709f062343b7806/?ulp=", 
                 s: "https://www.iherb.com/search?kw=", 
-                d: "Health & Wellness Essentials",
+                d: "Health & Supplements",
                 p: "100% Original"
             }
         ];
 
-        function executeSearch() {
+        function performSearch() {
             const q = document.getElementById('mainSearch').value;
-            const res = document.getElementById('results');
+            const res = document.getElementById('results-container');
             res.innerHTML = "";
             
             if(q.length > 1) {
-                stores.forEach(st => {
-                    // تصحيح الرابط العميق لضمان انتقال العميل للبحث مباشرة
+                storeList.forEach(st => {
+                    // Force English/Global parameters
                     let searchPath = st.s + encodeURIComponent(q);
                     
-                    // إجبار iHerb على الإنجليزية والأردن
                     if(st.n === "iHerb") {
-                        searchPath += "&l=en&cc=JO";
+                        searchPath += "&l=en&cc=JO"; // Force English and Jordan context
+                    } else if(st.n === "AliExpress") {
+                        searchPath += "&lan=en"; // Force English for AliExpress
                     }
 
                     const finalUrl = st.b + encodeURIComponent(searchPath);
                     
-                    // عرض البيانات (اسم، وصف، سعر) كما في مخططك
+                    // Displaying Name, Description, and Price status
                     res.innerHTML += `
                         <div class="card">
                             <div class="store-icon">${st.n}</div>
                             <div class="info">
-                                <span class="title">${st.n} Official</span>
+                                <span class="title">${st.n} Store</span>
                                 <span class="desc">${st.d}</span>
                                 <span class="price-tag">${st.p} for "${q}"</span>
                             </div>
@@ -99,8 +142,11 @@
                 });
             }
         }
+
+        function copy(text) {
+            navigator.clipboard.writeText(text);
+            alert("Copied: " + text);
+        }
     </script>
 </body>
 </html>
-
-
