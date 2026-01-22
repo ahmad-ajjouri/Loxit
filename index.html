@@ -1,171 +1,215 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta name="verify-admitad" content="e1ef4709f0" />
-    <script src="https://www.artfut.com/static/scripts/teleport.js?ad_space=2904772"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loxit™ | ذكاء الموقع</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Inter:wght@400;800&display=swap" rel="stylesheet">
-    
+    <title>LOXIT - Premium Shopping Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --bg: #1a1a2e;
-            --card: #16213e;
-            --accent: #00d1b2;
-            --text: #ffffff;
+            --primary-black: #121212;
+            --accent-green: #2ecc71;
+            --bg-light: #f8f9fa;
+            --card-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Cairo', sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            direction: rtl;
+        body { 
+            font-family: 'Inter', -apple-system, sans-serif; 
+            background-color: var(--bg-light); 
+            margin: 0; 
+            color: var(--primary-black); 
+            overflow-x: hidden;
         }
 
-        .app-container {
-            width: 100%;
-            max-width: 600px;
-            padding: 20px;
-            text-align: center;
+        /* Header & Brand */
+        .header { 
+            background: white; 
+            padding: 25px 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .logo { font-size: 28px; font-weight: 900; letter-spacing: -1px; text-transform: uppercase; margin-left: 40px; flex-grow: 1; text-align: center; }
+        .menu-btn { font-size: 24px; cursor: pointer; }
+
+        /* Modern Sidebar */
+        .sidebar { 
+            position: fixed; top: 0; right: -300px; width: 300px; height: 100%; 
+            background: white; box-shadow: -10px 0 30px rgba(0,0,0,0.1); 
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1000; 
+            padding: 80px 30px; box-sizing: border-box;
+        }
+        .sidebar.active { right: 0; }
+        .sidebar-brand { font-size: 24px; font-weight: 900; margin-bottom: 40px; }
+        .sidebar a { 
+            display: flex; align-items: center; gap: 15px; padding: 20px 0; 
+            color: var(--primary-black); text-decoration: none; font-size: 18px; 
+            font-weight: 500; border-bottom: 1px solid #f0f0f0; 
         }
 
-        .logo {
-            font-family: 'Inter', sans-serif;
-            font-size: 3rem;
-            font-weight: 800;
-            margin-top: 40px;
+        /* Navigation Tabs */
+        .nav-tabs { 
+            display: flex; justify-content: center; background: white; 
+            gap: 50px; border-bottom: 1px solid #eee;
+        }
+        .tab { 
+            font-size: 15px; font-weight: 800; color: #bbb; cursor: pointer; 
+            padding: 15px 5px; position: relative; transition: 0.3s;
+        }
+        .tab.active { color: var(--primary-black); }
+        .tab.active::after { 
+            content: ''; position: absolute; bottom: 0; left: 0; 
+            width: 100%; height: 3px; background: var(--primary-black); 
         }
 
-        .logo span { color: var(--accent); }
-        .logo small { font-size: 15px; color: var(--accent); vertical-align: top; }
+        /* Sections & Search */
+        .section { display: none; padding: 30px 20px; animation: fadeIn 0.4s ease; }
+        .section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .search-area { margin: 30px 0; }
-
-        .search-input-wrapper {
-            display: flex;
-            gap: 10px;
-            background: var(--card);
-            padding: 5px;
-            border-radius: 50px;
-            border: 2px solid #252545;
+        .search-wrapper { text-align: center; margin-bottom: 40px; }
+        .search-input { 
+            width: 100%; max-width: 450px; padding: 18px 25px; border-radius: 15px; 
+            border: 1px solid #eee; background: white; box-shadow: var(--card-shadow); 
+            font-size: 16px; outline: none;
         }
 
-        input {
-            flex: 1;
-            padding: 15px 20px;
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 16px;
-            outline: none;
+        /* Modern Cards for Stores and Discounts */
+        .card { 
+            background: white; padding: 25px; border-radius: 20px; 
+            margin: 0 auto 15px; display: flex; justify-content: space-between; 
+            align-items: center; max-width: 500px; transition: 0.3s;
+            border: 1px solid rgba(0,0,0,0.02);
         }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
+        
+        .info { display: flex; flex-direction: column; gap: 4px; text-align: left; }
+        .title { font-weight: 800; font-size: 17px; }
+        .sub-title { color: var(--accent-green); font-size: 15px; font-weight: 700; }
 
-        button {
-            padding: 10px 25px;
-            border-radius: 50px;
-            background: var(--accent);
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
+        .btn { 
+            background: var(--primary-black); color: white; border: none; 
+            padding: 12px 22px; border-radius: 12px; font-weight: 700; 
+            cursor: pointer; text-decoration: none; font-size: 13px;
         }
+        .btn-copy { background: #f0f0f0; color: var(--primary-black); border: 1px solid #ddd; }
 
-        .results-grid {
-            display: grid;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .product-card {
-            background: var(--card);
-            padding: 20px;
-            border-radius: 15px;
-            border-right: 5px solid var(--accent);
-            text-align: right;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .buy-btn {
-            background: var(--accent);
-            color: #1a1a2e;
-            padding: 12px;
-            border-radius: 8px;
-            text-decoration: none;
-            display: block;
-            text-align: center;
-            font-weight: bold;
-            margin-top: 15px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        /* Social Links */
+        .insta-link { color: #E1306C !important; font-weight: bold !important; border: none !important; }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <header>
-            <div class="logo">L<span>o</span>xit<small>™</small></div>
-            <p style="color: var(--accent); margin-top: 0;">ذكاء الموقع، دقة السعر</p>
-        </header>
 
-        <main>
-            <div class="search-area">
-                <div class="search-input-wrapper">
-                    <input type="text" id="searchInput" placeholder="ابحث عن منتج (مثلاً: iPhone 15)">
-                    <button onclick="startSearch()">🔍</button>
-                </div>
-            </div>
-            <div id="resultsArea" class="results-grid">
-                <p style="color: #94a3b8;">أدخل اسم المنتج لبدء التصفية الذكية..</p>
-            </div>
-        </main>
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-brand">LOXIT</div>
+        <a href="#" onclick="alert('LOXIT is your best choice to guide you to the best prices.')">
+            <i class="fa-solid fa-circle-info"></i> About Us
+        </a>
+        <a href="mailto:info@loxit.com">
+            <i class="fa-solid fa-comment-dots"></i> Feedback
+        </a>
+        <div style="margin-top: 40px;">
+            <a href="https://instagram.com/loxitofficial" target="_blank" class="insta-link">
+                <i class="fab fa-instagram"></i> loxitofficial
+            </a>
+        </div>
     </div>
 
+    <div class="header">
+        <div class="logo">LOXIT</div>
+        <div class="menu-btn" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars-staggered"></i>
+        </div>
+    </div>
+
+    <div class="nav-tabs">
+        <div class="tab active" onclick="switchTab('stores', this)">STORES</div>
+        <div class="tab" onclick="switchTab('discount', this)">DISCOUNTS</div>
+    </div>
+
+    <div id="stores" class="section active">
+        <div class="search-wrapper">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search for products..." oninput="handleSearch()">
+        </div>
+        <div id="store-results">
+            </div>
+    </div>
+
+    <div id="discount" class="section">
+        <div class="card">
+            <div class="info">
+                <span class="title">AliExpress Promo</span>
+                <span class="sub-title">15% OFF SITEWIDE</span>
+            </div>
+            <button class="btn btn-copy" onclick="copyCode('ALISALE')">COPY</button>
+        </div>
+        <div class="card">
+            <div class="info">
+                <span class="title">iHerb Global</span>
+                <span class="sub-title">20% DISCOUNT</span>
+            </div>
+            <button class="btn btn-copy" onclick="copyCode('NEW20')">COPY</button>
+        </div>
+        </div>
+
     <script>
-        function startSearch() {
-            const query = document.getElementById('searchInput').value.trim().toLowerCase();
-            const resultsArea = document.getElementById('resultsArea');
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
 
-            if (query.length < 3) {
-                alert("يرجى كتابة اسم منتج واضح");
-                return;
-            }
+        function switchTab(tabId, el) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            el.classList.add('active');
+            if(tabId === 'stores') toggleMenu(); // Close menu if open
+        }
 
-            let minPrice = "10";
-            let activeStores = ["amazon", "ebay", "aliexpress"];
+        // Your Admitad Affiliate Data
+        const storeData = [
+            { name: "AliExpress", base: "https://rzekl.com/g/1e8d114494e1ef4709f016525dc3e8/?ulp=", searchUrl: "https://www.aliexpress.com/wholesale?SearchText=" },
+            { name: "Alibaba", base: "https://rzekl.com/g/pm1aev55cle1ef4709f0219aa26f6f/?ulp=", searchUrl: "https://www.alibaba.com/showroom/" },
+            { name: "iHerb", base: "https://xnmik.com/g/ncvzabqdgme1ef4709f062343b7806/?ulp=", searchUrl: "https://www.iherb.com/search?kw=" }
+        ];
 
-            // فلاتر Loxit الذكية
-            if (query.includes("iphone") || query.includes("macbook") || query.includes("airpods")) {
-                minPrice = "120";
-                activeStores = ["amazon", "ebay"]; // إخفاء علي إكسبريس للماركات
-            }
-
-            resultsArea.innerHTML = `<p>جاري فحص المتاجر لـ ${query}...</p>`;
-
-            const storeData = {
-                amazon: { name: "Amazon", color: "#FF9900", link: `https://www.amazon.com/s?k=${encodeURIComponent(query)}&rh=p_36%3A${minPrice}00-` },
-                ebay: { name: "eBay", color: "#E53238", link: `https://www.ebay.com/sch/i.html?_nkw=${encodeURIComponent(query)}&_udlo=${minPrice}` },
-                aliexpress: { name: "AliExpress", color: "#FF4747", link: `https://www.aliexpress.com/wholesale?SearchText=${encodeURIComponent(query)}&minPrice=${minPrice}` }
-            };
-
-            setTimeout(() => {
-                resultsArea.innerHTML = "";
-                activeStores.forEach(key => {
-                    const store = storeData[key];
-                    resultsArea.innerHTML += `
-                        <div class="product-card" style="border-right-color: ${store.color}">
-                            <h4 style="margin:0;">${store.name}</h4>
-                            <p style="color:#94a3b8; font-size:12px;">تم تفعيل عتبة: +$${minPrice}</p>
-                            <a href="${store.link}" target="_blank" class="buy-btn">تحقق من السعر</a>
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value;
+            const container = document.getElementById('store-results');
+            container.innerHTML = "";
+            
+            if(query.length > 1) {
+                storeData.forEach(item => {
+                    const finalLink = item.base + encodeURIComponent(item.searchUrl + query);
+                    container.innerHTML += `
+                        <div class="card">
+                            <div class="info">
+                                <span class="title">${item.name}</span>
+                                <span style="font-size: 12px; color: #999;">Verified Affiliate Result</span>
+                            </div>
+                            <a href="${finalLink}" target="_blank" class="btn">VIEW DEAL</a>
                         </div>`;
                 });
-            }, 600);
+            }
         }
+
+        function copyCode(code) {
+            navigator.clipboard.writeText(code);
+            alert("Promo Code Copied: " + code);
+        }
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', (e) => {
+            const sidebar = document.getElementById('sidebar');
+            const menuBtn = document.querySelector('.menu-btn');
+            if (!sidebar.contains(e.target) && !menuBtn.contains(e.target) && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+        });
     </script>
 </body>
 </html>
+
