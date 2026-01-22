@@ -3,149 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOXIT - Premium Shopping</title>
+    <title>LOXIT - Smart Shopping</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --primary: #121212; --green: #2ecc71; --bg: #f8f9fa; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--primary); overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--primary); }
         .header { background: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 26px; font-weight: 900; letter-spacing: -1px; flex-grow: 1; text-align: center; }
-        .nav-tabs { display: flex; justify-content: center; background: white; gap: 40px; border-bottom: 1px solid #eee; }
-        .tab { font-size: 14px; font-weight: 800; color: #bbb; cursor: pointer; padding: 15px 5px; position: relative; transition: 0.3s; }
-        .tab.active { color: var(--primary); }
-        .tab.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--primary); }
-        .search-area { padding: 30px 20px; text-align: center; }
-        .search-box { width: 100%; max-width: 400px; padding: 15px 20px; border-radius: 12px; border: 1px solid #ddd; outline: none; box-shadow: 0 4px 12px rgba(0,0,0,0.05); font-size: 16px; }
+        .logo { font-size: 26px; font-weight: 900; letter-spacing: -1px; flex-grow: 1; text-align: center; text-transform: uppercase; }
+        .search-area { padding: 40px 20px; text-align: center; }
+        .search-box { width: 100%; max-width: 450px; padding: 18px 25px; border-radius: 15px; border: 1px solid #ddd; outline: none; box-shadow: 0 10px 25px rgba(0,0,0,0.05); font-size: 16px; transition: 0.3s; }
+        .search-box:focus { border-color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         
-        /* Product Cards according to your sketch */
-        .card { background: white; padding: 18px; border-radius: 16px; margin: 0 auto 12px; display: flex; align-items: center; gap: 15px; max-width: 450px; border: 1px solid rgba(0,0,0,0.03); transition: 0.3s; }
-        .card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
-        .store-icon { width: 60px; height: 60px; background: #121212; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 10px; color: #fff; text-align: center; line-height: 1.2; }
+        .card { background: white; padding: 20px; border-radius: 20px; margin: 0 auto 15px; display: flex; align-items: center; gap: 20px; max-width: 500px; border: 1px solid rgba(0,0,0,0.03); transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
+        .store-icon { width: 60px; height: 60px; background: var(--primary); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 10px; color: #fff; text-align: center; line-height: 1.2; }
         .info { flex-grow: 1; text-align: left; }
-        .title { font-weight: 800; font-size: 16px; display: block; color: #000; }
-        .desc { font-size: 12px; color: #777; display: block; margin-top: 2px; }
-        .price-tag { color: var(--green); font-weight: 700; font-size: 13px; margin-top: 4px; display: block; }
-        .go-btn { background: var(--primary); color: white; padding: 10px 18px; border-radius: 10px; text-decoration: none; font-size: 12px; font-weight: 700; transition: 0.2s; }
-        .go-btn:active { transform: scale(0.95); }
-
-        /* Sidebar */
-        .sidebar { position: fixed; top: 0; right: -300px; width: 300px; height: 100%; background: white; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: 0.4s; z-index: 1000; padding: 50px 20px; box-sizing: border-box; }
-        .sidebar.active { right: 0; }
-        .sidebar a { display: block; padding: 15px 0; color: #333; text-decoration: none; font-weight: 600; border-bottom: 1px solid #f5f5f5; }
+        .title { font-weight: 800; font-size: 18px; display: block; color: #000; }
+        .desc { font-size: 13px; color: #777; display: block; margin: 4px 0; }
+        .price-tag { color: var(--green); font-weight: 700; font-size: 14px; display: block; }
+        .go-btn { background: var(--primary); color: white; padding: 12px 22px; border-radius: 12px; text-decoration: none; font-size: 13px; font-weight: 700; transition: 0.2s; }
     </style>
 </head>
 <body>
 
-    <div id="sidebar" class="sidebar">
-        <h2 style="font-weight:900; margin-bottom: 30px;">LOXIT</h2>
-        <a href="#" onclick="alert('LOXIT is your best choice to guide you to the best prices.')">About Us</a>
-        <a href="mailto:info@loxit.com">Feedback</a>
-        <a href="https://instagram.com/loxitofficial" target="_blank" style="color: #E1306C;"><i class="fab fa-instagram"></i> loxitofficial</a>
-    </div>
-
     <div class="header">
-        <div class="logo">LOXIT</div>
-        <div onclick="toggleSidebar()" style="font-size: 24px; cursor: pointer;">☰</div>
+        <div class="logo" style="margin-left: 0;">LOXIT</div>
+        <div style="font-size: 24px; cursor: pointer;">☰</div>
     </div>
 
-    <div class="nav-tabs">
-        <div class="tab active" onclick="switchSection('stores', this)">STORES</div>
-        <div class="tab" onclick="switchSection('discounts', this)">DISCOUNTS</div>
+    <div class="search-area">
+        <input type="text" id="mainSearch" class="search-box" placeholder="Search for products (e.g. Laptop, Phone)..." oninput="doSmartSearch()">
     </div>
 
-    <div id="stores-sec" class="section-content" style="display: block;">
-        <div class="search-area">
-            <input type="text" id="mainSearch" class="search-box" placeholder="Search product name..." oninput="performSearch()">
-        </div>
-        <div id="results-container" style="padding: 0 20px 40px;"></div>
-    </div>
-
-    <div id="discounts-sec" class="section-content" style="display: none; padding: 40px 20px;">
-        <div class="card">
-            <div class="info">
-                <span class="title">iHerb Coupon</span>
-                <span class="desc">Global Wellness Discount</span>
-                <span class="price-tag">20% OFF</span>
-            </div>
-            <button class="go-btn" onclick="copy('NEW20')">COPY</button>
-        </div>
-    </div>
+    <div id="results" style="padding: 0 20px 40px;"></div>
 
     <script>
-        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
-        
-        function switchSection(sec, el) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            el.classList.add('active');
-            if(sec === 'stores') {
-                document.getElementById('stores-sec').style.display = 'block';
-                document.getElementById('discounts-sec').style.display = 'none';
-            } else {
-                document.getElementById('stores-sec').style.display = 'none';
-                document.getElementById('discounts-sec').style.display = 'block';
-            }
-        }
-
         const storeList = [
             { 
                 n: "AliExpress", 
                 b: "https://rzekl.com/g/1e8d114494e1ef4709f016525dc3e8/?ulp=", 
                 s: "https://www.aliexpress.com/wholesale?SearchText=", 
-                d: "Worldwide Shopping",
-                p: "Best Deals Found"
+                d: "Global Direct Market",
+                p: "Best Prices"
             },
             { 
                 n: "Alibaba", 
                 b: "https://rzekl.com/g/pm1aev55cle1ef4709f0219aa26f6f/?ulp=", 
-                s: "https://www.alibaba.com/trade/search?SearchText=", 
-                d: "Wholesale Global",
-                p: "Factory Direct"
+                s: "https://www.alibaba.com/trade/search?SearchText=", // تم تعديل الرابط لفتح صفحة النتائج مباشرة
+                d: "Wholesale & Bulk Supplies",
+                p: "Factory Rates"
             },
             { 
-                n: "iHerb", 
-                b: "https://xnmik.com/g/ncvzabqdgme1ef4709f062343b7806/?ulp=", 
-                s: "https://www.iherb.com/search?kw=", 
-                d: "Health & Supplements",
-                p: "100% Original"
+                n: "Geekbuying", 
+                b: "https://bywiola.com/g/78tuvzaw8ke1ef4709f00267b86f6e/?ulp=", // رابط Geekbuying الجديد
+                s: "https://www.geekbuying.com/search?keyword=", 
+                d: "Electronics & Tech Gadgets",
+                p: "Verified Tech"
             }
         ];
 
-        function performSearch() {
-            const q = document.getElementById('mainSearch').value;
-            const res = document.getElementById('results-container');
-            res.innerHTML = "";
+        function doSmartSearch() {
+            const q = document.getElementById('mainSearch').value.trim();
+            const resContainer = document.getElementById('results');
+            resContainer.innerHTML = "";
             
-            if(q.length > 1) {
+            // الفلترة: لا تظهر أي نتائج إلا إذا كتب العميل أكثر من حرفين
+            if(q.length > 2) {
                 storeList.forEach(st => {
-                    // Force English/Global parameters
-                    let searchPath = st.s + encodeURIComponent(q);
+                    const finalSearchUrl = st.b + encodeURIComponent(st.s + encodeURIComponent(q));
                     
-                    if(st.n === "iHerb") {
-                        searchPath += "&l=en&cc=JO"; // Force English and Jordan context
-                    } else if(st.n === "AliExpress") {
-                        searchPath += "&lan=en"; // Force English for AliExpress
-                    }
-
-                    const finalUrl = st.b + encodeURIComponent(searchPath);
-                    
-                    // Displaying Name, Description, and Price status
-                    res.innerHTML += `
+                    resContainer.innerHTML += `
                         <div class="card">
                             <div class="store-icon">${st.n}</div>
                             <div class="info">
                                 <span class="title">${st.n} Store</span>
                                 <span class="desc">${st.d}</span>
-                                <span class="price-tag">${st.p} for "${q}"</span>
+                                <span class="price-tag">Click to see prices for "${q}"</span>
                             </div>
-                            <a href="${finalUrl}" target="_blank" class="go-btn">VIEW</a>
+                            <a href="${finalSearchUrl}" target="_blank" class="go-btn">VIEW</a>
                         </div>`;
                 });
             }
-        }
-
-        function copy(text) {
-            navigator.clipboard.writeText(text);
-            alert("Copied: " + text);
         }
     </script>
 </body>
