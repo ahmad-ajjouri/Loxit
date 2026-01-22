@@ -75,17 +75,17 @@
             
             if(q.length > 1) {
                 stores.forEach(st => {
-                    // تصحيح روابط البحث لكل متجر
+                    // تصحيح الرابط العميق لضمان انتقال العميل للبحث مباشرة
                     let searchPath = st.s + encodeURIComponent(q);
                     
-                    // إصلاح خاص بـ iHerb لإجبار اللغة والنتائج
+                    // إجبار iHerb على الإنجليزية والأردن
                     if(st.n === "iHerb") {
                         searchPath += "&l=en&cc=JO";
                     }
 
                     const finalUrl = st.b + encodeURIComponent(searchPath);
                     
-                    // عرض الكروت بالبيانات الكاملة (اسم، وصف، سعر)
+                    // عرض البيانات (اسم، وصف، سعر) كما في مخططك
                     res.innerHTML += `
                         <div class="card">
                             <div class="store-icon">${st.n}</div>
@@ -102,4 +102,5 @@
     </script>
 </body>
 </html>
+
 
