@@ -1,68 +1,71 @@
-    
-<!DOCTYPE html>
+      <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOXIT - Premium Guide</title>
+    <title>LOXIT - Smart Shopping Guide</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --primary: #121212; --green: #2ecc71; --bg: #f8f9fa; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--primary); overflow-x: hidden; }
         
-        /* Header */
+        /* Header & Icon Toggle */
         .header { background: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 26px; font-weight: 900; letter-spacing: -1px; flex-grow: 1; text-align: center; cursor: pointer; }
-        .menu-icon { font-size: 24px; cursor: pointer; width: 30px; transition: 0.3s; }
+        .logo { font-size: 26px; font-weight: 900; letter-spacing: -1px; cursor: pointer; margin-left: 40px; }
+        .menu-icon { font-size: 24px; cursor: pointer; width: 30px; }
 
         /* Sidebar */
         .sidebar { position: fixed; top: 0; right: -300px; width: 300px; height: 100%; background: white; box-shadow: -10px 0 30px rgba(0,0,0,0.1); transition: 0.4s; z-index: 999; padding: 80px 25px; box-sizing: border-box; }
         .sidebar.active { right: 0; }
         .sidebar a { display: block; padding: 15px 0; color: var(--primary); text-decoration: none; font-weight: 600; border-bottom: 1px solid #f0f0f0; }
 
-        /* Tabs */
+        /* Navigation Tabs */
         .nav-tabs { display: flex; justify-content: center; background: white; gap: 40px; border-bottom: 1px solid #eee; }
         .tab { font-size: 14px; font-weight: 800; color: #bbb; cursor: pointer; padding: 15px 5px; position: relative; }
         .tab.active { color: var(--primary); }
         .tab.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--primary); }
 
-        /* Instructions Note */
-        .search-note { font-size: 12px; color: #777; margin-top: 10px; line-height: 1.6; max-width: 400px; margin-left: auto; margin-right: auto; }
-
-        /* Search & Cards */
+        /* Sections */
         .section { display: none; padding: 20px; animation: fadeIn 0.3s; }
         .section.active { display: block; }
-        .search-area { text-align: center; padding: 20px 0; }
-        .search-box { width: 100%; max-width: 400px; padding: 15px 20px; border-radius: 12px; border: 1px solid #ddd; outline: none; font-size: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
 
-        .card { background: white; padding: 20px; border-radius: 18px; margin: 0 auto 12px; display: flex; align-items: center; gap: 15px; max-width: 450px; border: 1px solid rgba(0,0,0,0.03); transition: 0.3s; }
-        .card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
+        /* Search & Notes */
+        .search-area { text-align: center; padding: 20px 0; }
+        .search-box { width: 100%; max-width: 400px; padding: 15px 20px; border-radius: 12px; border: 1px solid #ddd; outline: none; font-size: 16px; }
+        .note-box { font-size: 12px; color: #666; margin-top: 15px; line-height: 1.5; max-width: 400px; margin-inline: auto; background: #fff; padding: 10px; border-radius: 8px; border-left: 4px solid var(--primary); }
+
+        /* Cards */
+        .card { background: white; padding: 20px; border-radius: 18px; margin: 0 auto 12px; display: flex; align-items: center; gap: 15px; max-width: 450px; border: 1px solid rgba(0,0,0,0.03); position: relative; }
+        .verified-badge { position: absolute; top: 10px; right: 15px; font-size: 10px; color: var(--green); font-weight: 700; }
         .store-icon { width: 55px; height: 55px; background: var(--primary); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 9px; text-align: center; }
         .info { flex-grow: 1; text-align: left; }
         .title { font-weight: 800; font-size: 16px; display: block; }
-        .desc { font-size: 12px; color: #888; display: block; }
         .price-tag { color: var(--green); font-weight: 700; font-size: 13px; }
-        .go-btn { background: var(--primary); color: white; padding: 10px 18px; border-radius: 10px; text-decoration: none; font-size: 12px; font-weight: 700; }
-        
+        .go-btn { background: var(--primary); color: white; padding: 10px 18px; border-radius: 10px; text-decoration: none; font-size: 12px; font-weight: 700; border: none; cursor: pointer; }
+
+        /* About Section Style */
+        .about-content { max-width: 500px; margin: auto; text-align: left; line-height: 1.6; }
+
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
     <div id="sidebar" class="sidebar">
-        <h2 style="font-weight: 900; margin-bottom: 30px;">LOXIT</h2>
-        <a href="#" onclick="closeMenu(); switchTab('stores', document.querySelector('.tab'))">Home</a>
-        <a href="#" onclick="alert('LOXIT: Your ultimate guide to the best prices.')">About Us</a>
-        <a href="mailto:info@loxit.com">Feedback</a>
+        <h2 style="font-weight: 900;">LOXIT</h2>
+        <a href="#" onclick="switchTab('stores', document.querySelector('.tab'))">Home</a>
+        <a href="#" onclick="switchTab('about', document.querySelector('.tab'))">About LOXIT</a>
+        <a href="mailto:info@loxit.com">Business Inquiry</a>
         <a href="https://instagram.com/loxitofficial" target="_blank" style="color: #E1306C;"><i class="fab fa-instagram"></i> loxitofficial</a>
     </div>
 
     <div class="header">
-        <div class="menu-icon" id="menuToggle" onclick="toggleMenu()">
+        <div class="menu-icon" onclick="toggleMenu()">
             <i class="fa-solid fa-bars-staggered" id="iconShape"></i>
         </div>
         <div class="logo" onclick="location.reload()">LOXIT</div>
-        <div style="width: 30px;"></div> </div>
+        <div style="width: 30px;"></div>
+    </div>
 
     <div class="nav-tabs">
         <div class="tab active" onclick="switchTab('stores', this)">STORES</div>
@@ -71,24 +74,32 @@
 
     <div id="stores" class="section active">
         <div class="search-area">
-            <input type="text" id="mainSearch" class="search-box" placeholder="Type product name..." oninput="runSmartSearch()">
-            <div class="search-note">
-                <b>Note:</b> Please type the product name in detail. <br>
-                If the store's home page appears, it means the product you are looking for is unavailable.
+            <input type="text" id="mainSearch" class="search-box" placeholder="Search for products..." oninput="runSmartSearch()">
+            <div class="note-box">
+                <b>Guide:</b> Please type the product name in detail.<br>
+                <i>Note: If the store's home page appears, the specific product might be unavailable. Try turning off VPN for better results.</i>
             </div>
         </div>
         <div id="store-results"></div>
     </div>
 
     <div id="discount" class="section">
-        <div style="height: 20px;"></div>
+        <div style="height: 10px;"></div>
         <div class="card">
+            <span class="verified-badge"><i class="fas fa-check-circle"></i> VERIFIED TODAY</span>
             <div class="info">
-                <span class="title">Geekbuying Tech</span>
-                <span class="desc">Tech Gadgets Promo</span>
-                <span class="price-tag">UP TO 50% OFF</span>
+                <span class="title">AliExpress Promo</span>
+                <span class="price-tag">UP TO 70% OFF</span>
             </div>
-            <button class="go-btn" onclick="copy('GEEKDEAL')">COPY</button>
+            <button class="go-btn" onclick="copy('LOXIT15')">COPY CODE</button>
+        </div>
+    </div>
+
+    <div id="about" class="section">
+        <div class="about-content">
+            <h3 style="font-weight: 900;">Empowering Your Shopping Experience</h3>
+            <p><b>LOXIT</b> is a premier smart shopping guide and price comparison platform based in Jordan. We specialize in connecting savvy shoppers with top-tier global retailers like AliExpress, Alibaba, and Geekbuying.</p>
+            <p>Our mission is to simplify cross-border e-commerce by providing direct access to verified tech deals and wholesale prices, ensuring our users always get the best value for their money.</p>
         </div>
     </div>
 
@@ -98,7 +109,6 @@
 
         function toggleMenu() {
             sidebar.classList.toggle('active');
-            // تبديل الأيقونة بين الثلاث شحطات وسهم الرجوع
             if (sidebar.classList.contains('active')) {
                 iconShape.classList.replace('fa-bars-staggered', 'fa-arrow-left');
             } else {
@@ -106,45 +116,25 @@
             }
         }
 
-        function closeMenu() {
-            sidebar.classList.remove('active');
-            iconShape.classList.replace('fa-arrow-left', 'fa-bars-staggered');
-        }
-
         function switchTab(id, el) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            el.classList.add('active');
-            closeMenu();
+            if(el) el.classList.add('active');
+            sidebar.classList.remove('active');
+            iconShape.classList.replace('fa-arrow-left', 'fa-bars-staggered');
         }
 
         const myStores = [
-            { 
-                n: "AliExpress", 
-                b: "https://rzekl.com/g/1e8d114494e1ef4709f016525dc3e8/?ulp=", 
-                s: "https://www.aliexpress.com/wholesale?SearchText=", 
-                d: "Global Marketplace", p: "Best Price"
-            },
-            { 
-                n: "Alibaba", 
-                b: "https://rzekl.com/g/pm1aev55cle1ef4709f0219aa26f6f/?ulp=", 
-                s: "https://www.alibaba.com/showroom/", 
-                d: "Wholesale Supplies", p: "Factory Rates"
-            },
-            { 
-                n: "Geekbuying", 
-                b: "https://bywiola.com/g/78tuvzaw8ke1ef4709f00267b86f6e/?ulp=", 
-                s: "https://www.geekbuying.com/search?keyword=", 
-                d: "Electronics & Tech", p: "Verified Tech"
-            }
+            { n: "AliExpress", b: "https://rzekl.com/g/1e8d114494e1ef4709f016525dc3e8/?ulp=", s: "https://www.aliexpress.com/wholesale?SearchText=", d: "Global Retail" },
+            { n: "Alibaba", b: "https://rzekl.com/g/pm1aev55cle1ef4709f0219aa26f6f/?ulp=", s: "https://www.alibaba.com/showroom/", d: "Wholesale Hub" },
+            { n: "Geekbuying", b: "https://bywiola.com/g/78tuvzaw8ke1ef4709f00267b86f6e/?ulp=", s: "https://www.geekbuying.com/search?keyword=", d: "Tech Specialist" }
         ];
 
         function runSmartSearch() {
             const q = document.getElementById('mainSearch').value.trim();
             const res = document.getElementById('store-results');
             res.innerHTML = "";
-            
             if(q.length > 2) {
                 myStores.forEach(st => {
                     const finalLink = st.b + encodeURIComponent(st.s + encodeURIComponent(q));
@@ -152,9 +142,8 @@
                         <div class="card">
                             <div class="store-icon">${st.n}</div>
                             <div class="info">
-                                <span class="title">${st.n} Store</span>
-                                <span class="desc">${st.d}</span>
-                                <span class="price-tag">Click to search for "${q}"</span>
+                                <span class="title">${st.n} Official</span>
+                                <span class="price-tag">View results for "${q}"</span>
                             </div>
                             <a href="${finalLink}" target="_blank" class="go-btn">VIEW</a>
                         </div>`;
@@ -162,7 +151,8 @@
             }
         }
 
-        function copy(t) { navigator.clipboard.writeText(t); alert("Copied: " + t); }
+        function copy(t) { navigator.clipboard.writeText(t); alert("Coupon Copied: " + t); }
     </script>
 </body>
 </html>
+  
